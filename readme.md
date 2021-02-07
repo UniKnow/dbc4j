@@ -13,7 +13,7 @@
 
  Within [introduction design by contract](docs/introduction_dbc.md) we provide a deeper understanding of design by contract. The [Usage dbc4spring](docs/usage.md) chapter describes how the `dbc4java` framework can be used within your project. The [Validation Constraints](docs/validation_constraints.md) provides an overview of the constraint annotations that are default supported by `dbc4java`.
  
-##Compile
+## Compile
 
 To compile `dbc4java` execute: `mvnw clean install`
 
