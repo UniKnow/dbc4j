@@ -12,8 +12,6 @@ A method contract is a set of constraints that are evaluated before and after th
 
 A simple contract is shown below. The client of the method must send a parameter of type `int` that is smaller than `MAX_VALUES`. In return the client can be certain that that the method returns the value placed at the requested postion in the array.
 
-    @Named
-    @Validated
     public class SimpleMethodContract {
 
         /**

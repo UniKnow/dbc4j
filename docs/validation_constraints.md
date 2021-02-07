@@ -1,6 +1,6 @@
 # Validation Constraints
 
-The `dcb4spring` framework supports constraints in the form of annotations placed on a field, method or class of a spring managed bean.
+The `dbc4java` framework supports constraints in the form of annotations placed on a field, method or class of a spring managed bean.
 
 The list below lists all the built-in constraints.
 

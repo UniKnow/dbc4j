@@ -9,7 +9,7 @@ To use `dbc4java` within your project you need to include the following dependen
         <version>${project.version}</version>
     </dependency>
 
-Classes for which its constraints need to be verified require to be annotated with `@Validated` and the constraints on fields, methods, etc are also added as annotations to the class/method.
+Classes for which its constraints need to be verified require to be annotated with `javax.validation.constraints` on fields, methods, etc are also added as annotations to the class/method.
 
     @Named
     @Validated
@@ -34,7 +34,6 @@ Classes for which its constraints need to be verified require to be annotated wi
 
 In the example above we assure by the constraint `@Min(0)` that the integer is always positive.
 
-## Usage standalone
 To assure that the constraints are validated at every method invocation all classes need to be compiled with `aspectj`. For that the following snippet needs to be added to your `pom.xml`:
 
     <!--
