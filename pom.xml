@@ -10,6 +10,7 @@
     <description>Parent pom for Design By Contract for Java</description>
     <url>https://github.com/UniKnow/Dbc4J</url>
 
+    <inceptionYear>2017</inceptionYear>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -81,14 +82,9 @@
 
 
     <scm>
-        <connection>
-            scm:git:git://github.com/UniKnow/AgileDev.git
-        </connection>
-        <developerConnection>
-            scm:git:https://github.com/UniKnow/AgileDev.git
-        </developerConnection>
-        <url>https://github.com/UniKnow/AgileDev</url>
-        <tag>agiledev-0.1.15-SNAPSHOT</tag>
+        <connection>https://github.com/UniKnow/AsciiDoclet.git</connection>
+        <developerConnection>https://github.com/UniKnow/AsciiDoclet.git</developerConnection>
+        <url>https://github.com/UniKnow/AsciiDoclet</url>
     </scm>
 
     <modules>
@@ -137,6 +133,71 @@
                 </executions>
             </plugin>
 
+            <!-- Licensing java sources -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>current.year</name>
+                            <pattern>yyyy</pattern>
+                            <unit>year</unit>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <configuration>
+                    <licenseName>apache_v2</licenseName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>update-license</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.mycila</groupId>-->
+<!--                <artifactId>license-maven-plugin</artifactId>-->
+<!--                <version>3.0</version>-->
+<!--                <configuration>-->
+<!--                    <licenseSets>-->
+<!--                        <licenseSet>-->
+<!--                            <header>NOTICE</header>-->
+<!--                            <excludes>-->
+<!--                                <exclude>**/README</exclude>-->
+<!--                                <exclude>src/test/resources/**</exclude>-->
+<!--                                <exclude>src/main/resources/**</exclude>-->
+<!--                            </excludes>-->
+<!--                        </licenseSet>-->
+<!--                    </licenseSets>-->
+<!--                    <properties>-->
+<!--                        <startYear>2017</startYear>-->
+<!--                        <currentYear>${current.year}</currentYear>-->
+<!--                        <name>UniKnow</name>-->
+<!--                    </properties>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
             <!-- Plugins for releasing artifacts to maven central repository -->
             <plugin>

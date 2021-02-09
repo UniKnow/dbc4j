@@ -22,6 +22,6 @@ The list below lists all the built-in constraints.
 |`@Past`|The value of the field or property must be a date in the past|`@Past`<br/>`Date birthday;`|
 |`@Pattern`|The value of the field or property must match the regular expression defined in the `regexp` element|`@Pattern(regexp="\\(\\d{3}\\)\\d{3}-\\d{4}")`<br/>`String phoneNumber;`|
 |`@Size`|The size of the field or property is evaluated and must match the specified boundaries. If the field or property is `String`, the size of the string is evaluated. If the field or property is a `Collection`, `Map` or array, the size of the entity is evaluated. Use one of the optional `max` or `min` elements to specify the boundaries|`@Size(min=2, max=10)`<br/>`String identifier;`|
-|`@URL`|THe value of the field or property must be a valid URL.|`@URL`<br/>`String url;`|
+|`@URL`|The value of the field or property must be a valid URL.|`@URL`<br/>`String url;`|
 
 See [Using bean validation](http://docs.oracle.com/javaee/6/tutorial/doc/gircz.html)
