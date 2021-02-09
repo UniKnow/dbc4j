@@ -5,7 +5,7 @@
     <name>AgileDev DBC4J</name>
     <groupId>org.uniknow.agiledev.dbc4j</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Parent pom for Design By Contract for Java</description>
     <url>https://github.com/UniKnow/Dbc4J</url>
