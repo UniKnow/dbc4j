@@ -5,7 +5,7 @@
     <name>AgileDev DBC4J</name>
     <groupId>org.uniknow.agiledev.dbc4j</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
     <packaging>pom</packaging>
     <description>Parent pom for Design By Contract for Java</description>
     <url>https://github.com/UniKnow/Dbc4J</url>
@@ -174,75 +174,77 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>com.mycila</groupId>-->
-<!--                <artifactId>license-maven-plugin</artifactId>-->
-<!--                <version>3.0</version>-->
-<!--                <configuration>-->
-<!--                    <licenseSets>-->
-<!--                        <licenseSet>-->
-<!--                            <header>NOTICE</header>-->
-<!--                            <excludes>-->
-<!--                                <exclude>**/README</exclude>-->
-<!--                                <exclude>src/test/resources/**</exclude>-->
-<!--                                <exclude>src/main/resources/**</exclude>-->
-<!--                            </excludes>-->
-<!--                        </licenseSet>-->
-<!--                    </licenseSets>-->
-<!--                    <properties>-->
-<!--                        <startYear>2017</startYear>-->
-<!--                        <currentYear>${current.year}</currentYear>-->
-<!--                        <name>UniKnow</name>-->
-<!--                    </properties>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>check</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-
-            <!-- Plugins for releasing artifacts to maven central repository -->
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.5</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <useReleaseProfile>true</useReleaseProfile>
-                    <releaseProfiles>release-signed-artifacts</releaseProfiles>
-                    <goals>deploy</goals>
+                    <additionalJOptions>
+                        <additionalJOption>-J--add-exports=jdk.javadoc/jdk.javadoc.internal.tool=ALL-UNNAMED</additionalJOption> <!--1-->
+                        <additionalJOption>-Xdoclint:all,-html,-accessibility,-missing</additionalJOption> <!--2-->
+                        <additionalJOption>--base-dir</additionalJOption>
+                        <additionalJOption>${project.basedir}</additionalJOption>
+                    </additionalJOptions>
+                    <doclet>org.asciidoctor.asciidoclet.Asciidoclet</doclet>
+                    <docletArtifact>
+                        <groupId>org.uniknow</groupId>
+                        <artifactId>asciidoclet</artifactId>
+                        <version>2.1.1</version>
+                    </docletArtifact>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
             </plugin>
 
         </plugins>
+
     </build>
 
     <profiles>
         <profile>
             <id>release-signed-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Plugins for releasing artifacts to maven central repository -->
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.6</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <configuration>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                            <useReleaseProfile>true</useReleaseProfile>
+                            <releaseProfiles>release-signed-artifacts</releaseProfiles>
+                            <goals>deploy</goals>
+                        </configuration>
+                    </plugin>
+                    <!-- END: Plugins for releasing/branching project -->
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -259,7 +261,6 @@
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 
 </project>
