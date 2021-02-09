@@ -159,12 +159,10 @@
                 <configuration>
                     <licenseName>apache_v2</licenseName>
                     <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
-                    <processStartTag>========================LICENSE_START=================================</processStartTag>
-                    <processEndTag>=========================LICENSE_END==================================</processEndTag>
-
-<!--                    <processStartTag>/**</processStartTag>-->
-<!--                    <sectionDelimiter><br/></sectionDelimiter>-->
-<!--                    <processEndTag>*/</processEndTag>-->
+                    <!-- Don't change these settings; //// is treated as comment by asciidoc doclet -->
+                    <processStartTag>////========================LICENSE_START=================================</processStartTag>
+                    <sectionDelimiter>////</sectionDelimiter>
+                    <processEndTag>////=========================LICENSE_END==================================</processEndTag>
                 </configuration>
                 <executions>
                     <execution>
