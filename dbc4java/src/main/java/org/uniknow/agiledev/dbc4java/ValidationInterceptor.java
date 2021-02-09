@@ -1,7 +1,5 @@
-package org.uniknow.agiledev.dbc4java;
-
 /*-
- * #%L
+ * ========================LICENSE_START=================================
  * Design By Contracts for Java
  * %%
  * Copyright (C) 2017 - 2021 UniKnow
@@ -9,16 +7,17 @@ package org.uniknow.agiledev.dbc4java;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
+ * =========================LICENSE_END==================================
  */
+package org.uniknow.agiledev.dbc4java;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -38,8 +37,8 @@ import java.util.logging.Logger;
 
 /**
  * Intercepts method calls of classes which are annotated with
- * {@code @Validated}.
- * 
+ * {@code javax.validation.constraints.*}.
+ *
  * @author mase
  * @since 0.1.3
  */
@@ -47,13 +46,13 @@ import java.util.logging.Logger;
 public final class ValidationInterceptor {
 
     private static final Logger LOGGER = Logger
-        .getLogger(ValidationInterceptor.class.getName());
+            .getLogger(ValidationInterceptor.class.getName());
 
     private final ExecutableValidator executableValidator;
 
     ValidationInterceptor() {
         executableValidator = Validation.buildDefaultValidatorFactory()
-            .getValidator().forExecutables();
+                .getValidator().forExecutables();
     }
 
     /**
@@ -65,10 +64,10 @@ public final class ValidationInterceptor {
     public final void validateConstructorParameters(final JoinPoint joinPoint) {
 
         final Constructor constructor = ((ConstructorSignature) joinPoint
-            .getSignature()).getConstructor();
+                .getSignature()).getConstructor();
 
         final Set<ConstraintViolation<Object>> violations = executableValidator
-            .validateConstructorParameters(constructor, joinPoint.getArgs());
+                .validateConstructorParameters(constructor, joinPoint.getArgs());
 
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
@@ -82,13 +81,13 @@ public final class ValidationInterceptor {
     public final void validateMethodInvocation(final JoinPoint pjp) {
 
         final Method method = ((MethodSignature) pjp.getSignature())
-            .getMethod();
+                .getMethod();
         final Object instance = pjp.getTarget();
 
         // Validate constraint(s) method parameters.
         final Object[] arguments = pjp.getArgs();
         final Set<ConstraintViolation<Object>> violations = executableValidator
-            .validateParameters(instance, method, arguments);
+                .validateParameters(instance, method, arguments);
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
         }
@@ -98,8 +97,8 @@ public final class ValidationInterceptor {
      * Validate method response if annotated with constraints.
      */
     @AfterReturning(
-        pointcut = "execution(@(javax.validation.constraints.*) * *(..))",
-        returning = "result")
+            pointcut = "execution(@(javax.validation.constraints.*) * *(..))",
+            returning = "result")
     public void after(final JoinPoint pjp, final Object result) {
 
         final Object instance = pjp.getTarget();
@@ -107,18 +106,18 @@ public final class ValidationInterceptor {
         if (instance != null) {
 
             final Method method = ((MethodSignature) pjp.getSignature())
-                .getMethod();
+                    .getMethod();
 
             if ((method != null) && !method.getReturnType().equals(Void.TYPE)) {
                 // Validate constraint return value method
                 final Set<ConstraintViolation<Object>> violations = executableValidator
-                    .validateReturnValue(instance, method, result);
+                        .validateReturnValue(instance, method, result);
                 if (!violations.isEmpty()) {
                     throw new ConstraintViolationException(violations);
                 }
             } else {
                 LOGGER
-                    .fine("Skipped validation return value while method is null");
+                        .fine("Skipped validation return value while method is null");
             }
         }
     }

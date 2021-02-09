@@ -1,7 +1,5 @@
-package org.uniknow.agiledev.dbc4java.examples;
-
 /*-
- * #%L
+ * ========================LICENSE_START=================================
  * Design By Contracts for Java
  * %%
  * Copyright (C) 2017 - 2021 UniKnow
@@ -9,16 +7,17 @@ package org.uniknow.agiledev.dbc4java.examples;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
+ * =========================LICENSE_END==================================
  */
+package org.uniknow.agiledev.dbc4java.examples;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -47,13 +46,13 @@ public class ExampleValidationConstraint {
 
     /**
      * Method by which price is set.
-     * 
+     *
      * @param price
-     *            price, should be in the range of 0.00 till 99.99 and have the
-     *            format xx.xx
+     *         price, should be in the range of 0.00 till 99.99 and have the
+     *         format xx.xx
      */
     public void setPrice(@DecimalMin("0.00") @DecimalMax("99.99") @Digits(
-        integer = 2, fraction = 2) BigDecimal price) {
+            integer = 2, fraction = 2) BigDecimal price) {
         this.price = price;
     }
 
@@ -64,10 +63,10 @@ public class ExampleValidationConstraint {
     /**
      * Example of method for which passed boolean parameter should always be
      * {@code false}.
-     * 
+     *
      * @param active
-     *            boolean indicating whether customer is active; should always
-     *            be {@code false}.
+     *         boolean indicating whether customer is active; should always
+     *         be {@code false}.
      */
     public void setCustomerInactive(@AssertFalse boolean active) {
         this.active = active;
@@ -76,10 +75,10 @@ public class ExampleValidationConstraint {
     /**
      * Example of method for which passed boolean parameter should always be
      * {@code true}.
-     * 
+     *
      * @param active
-     *            boolean indicating whether customer is active; should always
-     *            be {@code true}.
+     *         boolean indicating whether customer is active; should always
+     *         be {@code true}.
      */
     public void setCustomerActive(@AssertTrue boolean active) {
         this.active = active;
@@ -149,7 +148,7 @@ public class ExampleValidationConstraint {
      * expression
      */
     public void setPhoneNumber(
-        @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$") String phoneNumber) {
+            @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$") String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

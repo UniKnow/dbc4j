@@ -1,7 +1,5 @@
-package org.uniknow.agiledev.tutorial.dbc;
-
-/**
- * #%L
+/*-
+ * ========================LICENSE_START=================================
  * Tutorial Design by Contract
  * %%
  * Copyright (C) 2017 - 2021 UniKnow
@@ -17,8 +15,9 @@ package org.uniknow.agiledev.tutorial.dbc;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
+ * =========================LICENSE_END==================================
  */
+package org.uniknow.agiledev.tutorial.dbc;
 
 import javax.validation.constraints.Min;
 

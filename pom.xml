@@ -158,6 +158,13 @@
                 <version>2.0.0</version>
                 <configuration>
                     <licenseName>apache_v2</licenseName>
+                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                    <processStartTag>========================LICENSE_START=================================</processStartTag>
+                    <processEndTag>=========================LICENSE_END==================================</processEndTag>
+
+<!--                    <processStartTag>/**</processStartTag>-->
+<!--                    <sectionDelimiter><br/></sectionDelimiter>-->
+<!--                    <processEndTag>*/</processEndTag>-->
                 </configuration>
                 <executions>
                     <execution>
