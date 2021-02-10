@@ -17,3 +17,5 @@
 
 To compile `dbc4java` execute: `mvnw clean install`
 
+To release `dbc4java` execute: `mvnw clean deploy -P release-signed-artifacts`
+
